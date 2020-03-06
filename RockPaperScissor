@@ -1,0 +1,57 @@
+package com.company;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    String rock, paper, scissor;
+
+    public static void main(String[] args) {
+        greeting();
+        String user = usrInput();
+        String pc = pcRoll();
+        System.out.println("You picked: " + user.toLowerCase() + " and the PC chose: " + pc.toLowerCase());
+        versus(user, pc);
+        System.out.println("Good game!");
+    }
+
+    public static void greeting() {
+        System.out.println("Hello!");
+        System.out.println("Welcome to a simple game of rock paper scissor");
+        System.out.println("Which do you choose: ");
+    }
+
+    public static String usrInput(){
+        Scanner scanner = new Scanner(System.in);
+        String usrChoice = scanner.next();
+        usrChoice.toLowerCase();
+        return usrChoice;
+    }
+
+    public static String pcRoll(){
+        Random rn = new Random();
+        int roll = rn.ints(0, (2)).findFirst().getAsInt();
+        String pcRoll = (roll == 0) ? "Rock" : (roll == 1) ? "Paper" : "Scissor";
+        return pcRoll;
+    }
+    public static void versus(String a, String b){
+
+        if (a.equalsIgnoreCase(b)){
+            System.out.println("It's a draw!");}
+        else if(aAndB(a, b, "rock", "scissor") || aAndB(a, b, "scissor", "paper") || aAndB(a, b, "paper", "rock")){
+            System.out.println("You win!");}
+        else if (validChoices(a)){
+            System.out.println("Your choice is invalid. Or you're dyslexic, either way you're out");}
+        else{
+            System.out.println("You lose!");}
+    }
+    
+    public static boolean aAndB(String a, String b, String c, String d){
+        boolean b1 = a.equalsIgnoreCase(c) && b.equalsIgnoreCase(d);
+        return b1;
+    }
+
+    public static boolean validChoices(String a){
+        boolean abrv = !a.equalsIgnoreCase("rock") && !a.equalsIgnoreCase("paper") && !a.equalsIgnoreCase("scissor");
+        return abrv;
+    }
